@@ -1,21 +1,20 @@
-# [puppetlabs/puppetdb](https://github.com/puppetlabs/puppetdb)
+# Voxpupuli PuppetDB container
 
-The Dockerfile for this image is available in the PuppetDB repository
-[here][1].
+This project hosts the Dockerfile and the required scripts to build a PuppetDB container image.
 
 The PuppetDB container requires a working postgres container or other suitably
 configured PostgreSQL database. With that in place, you can run PuppetDB like
 so:
 
-    docker run --link postgres:postgres --link puppet:puppet puppet/puppetdb
+    docker run --link postgres:postgres --link puppet:puppet voxpupuli/puppetdb
 
 You can change configuration settings by mounting volumes containing
 configuration files or by using this image as a base image. For the defaults,
-see the [Dockerfile and supporting folders][2].
+see the [Dockerfile and supporting folders][1].
 
-For more details about PuppetDB, see the [official documentation][3].
+For more details about PuppetDB, see the [official documentation][2].
 
-See the [pupperware repository][4] for how to run a full Puppet stack using
+See the [pupperware repository][3] for how to run a full Puppet stack using
 Docker Compose.
 
 ## Configuration
@@ -69,8 +68,6 @@ to your `docker run` command.
 
  This is disabled by default.
 
-
-[1]: https://github.com/puppetlabs/puppetdb/blob/master/docker/puppetdb/Dockerfile
-[2]: https://github.com/puppetlabs/puppetdb/tree/master/docker
-[3]: https://puppet.com/docs/puppetdb/latest/index.html
-[4]: https://github.com/puppetlabs/pupperware
+[1]: https://github.com/puppetlabs/puppetdb/tree/master/docker
+[2]: https://puppet.com/docs/puppetdb/latest/index.html
+[3]: https://github.com/puppetlabs/pupperware
