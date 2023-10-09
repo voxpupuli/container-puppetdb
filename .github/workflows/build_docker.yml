@@ -1,0 +1,22 @@
+name: Build and publish a 🛢️ container
+
+on:
+  push:
+    paths-ignore:
+      - '.github/**'
+    branches:
+      - 'main'
+    tags:
+      - '*'
+
+jobs:
+  build-and-push-container:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: voxpupuli/gha-build-and-publish-a-container@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          build_arch: linux/amd64,linux/arm64
