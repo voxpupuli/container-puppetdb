@@ -35,7 +35,7 @@ ENV PUPPERWARE_ANALYTICS_ENABLED=false \
 # puppetdb data and generated certs
 VOLUME /opt/puppetlabs/server/data/puppetdb
 
-LABEL org.label-schema.maintainer="Voxpupuli Release Team <info@voxpupuli.org>" \
+LABEL org.label-schema.maintainer="Voxpupuli Release Team <voxpupuli@groups.io>" \
       org.label-schema.vendor="Voxpupuli" \
       org.label-schema.url="https://github.com/puppetlabs/puppetdb" \
       org.label-schema.license="Apache-2.0" \
