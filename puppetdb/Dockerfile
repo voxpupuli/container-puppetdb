@@ -1,6 +1,6 @@
 # Determines source "edge" or binary "release" builds
-ARG build_type=edge
-ARG UBUNTU_CODENAME=bionic
+ARG build_type=release
+ARG UBUNTU_CODENAME=jammy
 # NOTE: never pass as a build-arg / must match .dockerenv -- used in logback.xml
 ARG LOGDIR=/opt/puppetlabs/server/data/puppetdb/logs
 
@@ -8,9 +8,9 @@ ARG LOGDIR=/opt/puppetlabs/server/data/puppetdb/logs
 # base
 ######################################################
 
-FROM ubuntu:18.04 as base
+FROM ubuntu:22.04 as base
 
-ARG DUMB_INIT_VERSION="1.2.2"
+ARG DUMB_INIT_VERSION="1.2.5"
 ARG LOGDIR
 
 ENV PUPPERWARE_ANALYTICS_ENABLED=false \
@@ -35,8 +35,8 @@ ENV PUPPERWARE_ANALYTICS_ENABLED=false \
 # puppetdb data and generated certs
 VOLUME /opt/puppetlabs/server/data/puppetdb
 
-LABEL org.label-schema.maintainer="Puppet Release Team <release@puppet.com>" \
-      org.label-schema.vendor="Puppet" \
+LABEL org.label-schema.maintainer="Voxpupuli Release Team <info@voxpupuli.org>" \
+      org.label-schema.vendor="Voxpupuli" \
       org.label-schema.url="https://github.com/puppetlabs/puppetdb" \
       org.label-schema.license="Apache-2.0" \
       org.label-schema.vcs-url="https://github.com/puppetlabs/puppetdb" \
@@ -61,59 +61,17 @@ ADD https://raw.githubusercontent.com/puppetlabs/pupperware/1c8d5f7fdcf2a81dfaf3
 # hadolint ignore=DL3020
 ADD https://raw.githubusercontent.com/puppetlabs/wtfc/6aa5eef89728cc2903490a618430cc3e59216fa8/wtfc.sh \
     https://github.com/Yelp/dumb-init/releases/download/v"$DUMB_INIT_VERSION"/dumb-init_"$DUMB_INIT_VERSION"_amd64.deb \
-    docker/puppetdb/docker-entrypoint.sh \
-    docker/puppetdb/healthcheck.sh \
+    docker-entrypoint.sh \
+    healthcheck.sh \
     /
 
-COPY docker/puppetdb/docker-entrypoint.d /docker-entrypoint.d
+COPY docker-entrypoint.d /docker-entrypoint.d
 
 # hadolint ignore=DL3009
 RUN apt-get update && \
     apt-get install --no-install-recommends -y ca-certificates curl dnsutils netcat && \
     chmod +x /ssl.sh /wtfc.sh /docker-entrypoint.sh /healthcheck.sh /docker-entrypoint.d/*.sh && \
     dpkg -i dumb-init_"$DUMB_INIT_VERSION"_amd64.deb
-
-######################################################
-# edge (build from source)
-######################################################
-
-FROM ubuntu:18.04 as build
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-            language-pack-en \
-            openjdk-8-jdk-headless \
-            curl \
-            git \
-            ruby \
-            ruby-dev \
-            g++ \
-            make && \
-    git config --global user.name "Puppet Release Team" && \
-    git config --global user.email "release@puppet.com" && \
-    curl --output /usr/local/bin/lein https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
-    chmod 0755 /usr/local/bin/lein && \
-    /usr/local/bin/lein && \
-    gem install --no-doc bundler fpm
-
-COPY . /puppetdb
-# manually copy over bootstrap.cfg to work around symlink issues on windows
-COPY resources/puppetlabs/puppetdb/bootstrap.cfg /puppetdb/resources/ext/config/bootstrap.cfg
-WORKDIR /puppetdb
-
-# Fixes a linux 5.6 - 5.10 kernel bug around copy_file_range syscall
-# https://github.com/docker/for-linux/issues/1015
-ENV RUBYOPT=-r/puppetdb/docker/ruby-docker-copy-patch
-RUN lein clean && lein install && \
-    EZBAKE_ALLOW_UNREPRODUCIBLE_BUILDS=true EZBAKE_NODEPLOY=true COW=base-bionic-amd64.cow MOCK='' GEM_SOURCE=https://rubygems.org lein with-profile ezbake ezbake local-build && \
-    mv /puppetdb/output/deb/bionic/*/*.deb /puppetdb.deb
-
-FROM base as edge
-
-COPY --from=build /puppetdb.deb /puppetdb.deb
-
-ARG UBUNTU_CODENAME
-ARG install_path=/puppetdb.deb
-ARG deb_uri=http://nightlies.puppet.com/apt/puppet7-nightly-release-$UBUNTU_CODENAME.deb
 
 ######################################################
 # release (build from packages)
@@ -160,11 +118,11 @@ RUN dpkg -i /puppet.deb && \
     rm -f /etc/puppetlabs/puppetdb/conf.d/database.ini && \
     rm -f /etc/puppetlabs/puppetdb/conf.d/config.ini
 
-COPY docker/puppetdb/logback.xml \
-     docker/puppetdb/request-logging.xml \
+COPY logback.xml \
+     request-logging.xml \
      /etc/puppetlabs/puppetdb/
-COPY docker/puppetdb/conf.d /etc/puppetlabs/puppetdb/conf.d/
-COPY docker/puppetdb/puppetdb /etc/default/puppetdb
+COPY conf.d /etc/puppetlabs/puppetdb/conf.d/
+COPY puppetdb /etc/default/puppetdb
 
 ENV PUPPERWARE_ANALYTICS_STREAM="$pupperware_analytics_stream" \
     PUPPETDB_VERSION="$version"
@@ -174,4 +132,4 @@ LABEL org.label-schema.name="PuppetDB ($build_type)" \
       org.label-schema.version="$version" \
       org.label-schema.build-date="$build_date"
 
-COPY docker/puppetdb/Dockerfile /
+COPY Dockerfile /

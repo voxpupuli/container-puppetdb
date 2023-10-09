@@ -1,5 +1,5 @@
 PUPPERWARE_ANALYTICS_STREAM ?= dev
-NAMESPACE ?= puppet
+NAMESPACE ?= voxpupuli
 git_describe = $(shell git describe)
 vcs_ref := $(shell git rev-parse HEAD)
 build_date := $(shell date -u +%FT%T)
@@ -10,7 +10,7 @@ export BUNDLE_PATH = $(PWD)/.bundle/gems
 export BUNDLE_BIN = $(PWD)/.bundle/bin
 export GEMFILE = $(PWD)/Gemfile
 export DOCKER_BUILDKIT ?= 1
-export PUPPETSERVER_IMAGE ?= puppet/puppetserver:edge
+export PUPPETSERVER_IMAGE ?= voxpupuli/puppetserver:edge
 
 ifeq ($(IS_RELEASE),true)
 	VERSION ?= $(shell echo $(git_describe) | sed 's/-.*//')
@@ -86,7 +86,7 @@ push-readme:
 		-v $(PWD)/README.md:/data/README.md \
 		-e DOCKERHUB_USERNAME="$(DOCKERHUB_USERNAME)" \
 		-e DOCKERHUB_PASSWORD="$(DOCKERHUB_PASSWORD)" \
-		-e DOCKERHUB_REPO_PREFIX=puppet \
+		-e DOCKERHUB_REPO_PREFIX=voxpupuli \
 		-e DOCKERHUB_REPO_NAME=puppetdb \
 		sheogorath/readme-to-dockerhub
 
