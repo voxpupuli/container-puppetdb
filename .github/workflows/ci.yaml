@@ -26,14 +26,14 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          tags: 'ci/hdm:${{ github.sha }}'
+          context: puppetdb
+          tags: 'ci/puppdb:${{ github.sha }}'
           push: false
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'ci/hdm:${{ github.sha }}'
+          image-ref: 'ci/puppdb:${{ github.sha }}'
           format: 'sarif'
           output: 'trivy-results.sarif'
 
