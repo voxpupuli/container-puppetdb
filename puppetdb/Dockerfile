@@ -68,10 +68,12 @@ ADD https://raw.githubusercontent.com/puppetlabs/wtfc/6aa5eef89728cc2903490a6184
 COPY docker-entrypoint.d /docker-entrypoint.d
 
 # hadolint ignore=DL3009
-RUN apt-get update && \
-    apt-get install --no-install-recommends -y ca-certificates curl dnsutils netcat && \
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt update && \
+    apt install --no-install-recommends -y ca-certificates curl dnsutils netcat && \
     chmod +x /ssl.sh /wtfc.sh /docker-entrypoint.sh /healthcheck.sh /docker-entrypoint.d/*.sh && \
-    dpkg -i dumb-init_"$DUMB_INIT_VERSION"_amd64.deb
+    dpkg -i dumb-init_"$DUMB_INIT_VERSION"_amd64.deb && \
+    rm dumb-init_"$DUMB_INIT_VERSION"_amd64.deb
 
 ######################################################
 # release (build from packages)
@@ -81,7 +83,6 @@ FROM base as release
 
 ARG version
 ARG UBUNTU_CODENAME
-ARG install_path=puppetdb="$version"-1"$UBUNTU_CODENAME"
 ARG deb_uri=https://apt.puppetlabs.com/puppet7-release-$UBUNTU_CODENAME.deb
 
 ######################################################
@@ -96,7 +97,6 @@ ARG vcs_ref
 ARG version
 ARG build_date
 ARG build_type
-ARG install_path
 ARG deb_uri
 # used by entrypoint to submit metrics to Google Analytics;
 # published images should use "production" for this build_arg
@@ -108,9 +108,9 @@ ADD $deb_uri /puppet.deb
 
 RUN dpkg -i /puppet.deb && \
     rm /puppet.deb && \
-    apt-get update && \
-    apt-get install --no-install-recommends -y $install_path && \
-    apt-get clean && \
+    apt update && \
+    apt install --no-install-recommends -y puppetdb && \
+    apt autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p "$LOGDIR" && \
 # We want to use the HOCON database.conf and config.conf files, so get rid
