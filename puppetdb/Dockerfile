@@ -37,9 +37,9 @@ VOLUME /opt/puppetlabs/server/data/puppetdb
 
 LABEL org.label-schema.maintainer="Voxpupuli Release Team <voxpupuli@groups.io>" \
       org.label-schema.vendor="Vox Pupuli" \
-      org.label-schema.url="https://github.com/puppetlabs/puppetdb" \
+      org.label-schema.url="https://github.com/voxpupuli/puppetdb-container" \
       org.label-schema.license="Apache-2.0" \
-      org.label-schema.vcs-url="https://github.com/puppetlabs/puppetdb" \
+      org.label-schema.vcs-url="https://github.com/voxpupuli/puppetdb-container" \
       org.label-schema.schema-version="1.0" \
       org.label-schema.dockerfile="/Dockerfile"
 
