@@ -8,6 +8,7 @@ on:
       - 'main'
     tags:
       - '*'
+  workflow_dispatch:
 
 jobs:
   build-and-push-container:
@@ -16,8 +17,20 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: voxpupuli/gha-build-and-publish-a-container@v2
+      - name: Build PuppetDB 7 container
+        uses: voxpupuli/gha-build-and-publish-a-container@v2
         with:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
+          build_args: 'PUPPET_VERSION=7'
           build_arch: linux/amd64,linux/arm64
-          buildfile: puppetdb/Dockerfile
+          buildfile: 'puppetdb/Dockerfile'
+        if: ${{ startsWith(github.ref_name, 'v7') }}
+
+      - name: Build PuppetDB 8 container
+        uses: voxpupuli/gha-build-and-publish-a-container@v2
+        with:
+          registry_password: ${{ secrets.GITHUB_TOKEN }}
+          build_args: 'PUPPET_VERSION=8'
+          build_arch: linux/amd64,linux/arm64
+          buildfile: 'puppetdb/Dockerfile'
+        if: ${{ startsWith(github.ref_name, 'v8') }}

@@ -81,9 +81,11 @@ RUN apt update && \
 
 FROM base as release
 
+ARG PUPPET_VERSION
+ENV PUPPET_VERSION=${PUPPET_VERSION:-7}
+
 ARG version
 ARG UBUNTU_CODENAME
-ARG deb_uri=https://apt.puppetlabs.com/puppet7-release-$UBUNTU_CODENAME.deb
 
 ######################################################
 # final image
@@ -97,17 +99,16 @@ ARG vcs_ref
 ARG version
 ARG build_date
 ARG build_type
-ARG deb_uri
 # used by entrypoint to submit metrics to Google Analytics;
 # published images should use "production" for this build_arg
 ARG pupperware_analytics_stream="dev"
 ARG LOGDIR
 
-# hadolint ignore=DL3020
-ADD $deb_uri /puppet.deb
+ENV PUPPET_DEB=puppet${PUPPET_VERSION}-release-$UBUNTU_CODENAME.deb
+ADD https://apt.puppet.com/${PUPPET_DEB} /${PUPPET_DEB}
 
-RUN dpkg -i /puppet.deb && \
-    rm /puppet.deb && \
+RUN dpkg -i /${PUPPET_DEB} && \
+    rm /${PUPPET_DEB} && \
     apt update && \
     apt install --no-install-recommends -y puppetdb && \
     apt autoremove && \
