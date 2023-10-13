@@ -13,8 +13,7 @@ FROM ubuntu:22.04 as base
 ARG DUMB_INIT_VERSION="1.2.5"
 ARG LOGDIR
 
-ENV PUPPERWARE_ANALYTICS_ENABLED=false \
-    PUPPETDB_POSTGRES_HOSTNAME="postgres" \
+ENV PUPPETDB_POSTGRES_HOSTNAME="postgres" \
     PUPPETDB_POSTGRES_PORT="5432" \
     PUPPETDB_POSTGRES_DATABASE="puppetdb" \
     CERTNAME=puppetdb \
@@ -81,10 +80,12 @@ RUN apt update && \
 
 FROM base as release
 
-ARG PUPPET_VERSION
-ENV PUPPET_VERSION=${PUPPET_VERSION:-7}
+ARG PUPPET_RELEASE
+ENV PUPPET_RELEASE=${PUPPET_RELEASE:-7}
 
-ARG version
+ARG PUPPETDB_VERSION
+ENV PUPPETDB_VERSION=${PUPPETDB_VERSION:-7.14.0}
+
 ARG UBUNTU_CODENAME
 
 ######################################################
@@ -96,21 +97,17 @@ ARG UBUNTU_CODENAME
 FROM ${build_type} as final
 
 ARG vcs_ref
-ARG version
 ARG build_date
 ARG build_type
-# used by entrypoint to submit metrics to Google Analytics;
-# published images should use "production" for this build_arg
-ARG pupperware_analytics_stream="dev"
 ARG LOGDIR
 
-ENV PUPPET_DEB=puppet${PUPPET_VERSION}-release-$UBUNTU_CODENAME.deb
+ENV PUPPET_DEB=puppet${PUPPET_RELEASE}-release-${UBUNTU_CODENAME}.deb
 ADD https://apt.puppet.com/${PUPPET_DEB} /${PUPPET_DEB}
 
 RUN dpkg -i /${PUPPET_DEB} && \
     rm /${PUPPET_DEB} && \
     apt update && \
-    apt install --no-install-recommends -y puppetdb && \
+    apt install --no-install-recommends -y puppetdb=${PUPPETDB_VERSION}-1${UBUNTU_CODENAME} && \
     apt autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p "$LOGDIR" && \
@@ -125,12 +122,7 @@ COPY logback.xml \
 COPY conf.d /etc/puppetlabs/puppetdb/conf.d/
 COPY puppetdb /etc/default/puppetdb
 
-ENV PUPPERWARE_ANALYTICS_STREAM="$pupperware_analytics_stream" \
-    PUPPETDB_VERSION="$version"
-
 LABEL org.label-schema.name="PuppetDB ($build_type)" \
       org.label-schema.vcs-ref="$vcs_ref" \
-      org.label-schema.version="$version" \
+      org.label-schema.version="$PUPPETDB_VERSION" \
       org.label-schema.build-date="$build_date"
-
-COPY Dockerfile /
