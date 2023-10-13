@@ -23,7 +23,7 @@ jobs:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           build_args: 'PUPPET_RELEASE=7,PUPPET_VERSION=${{ github.ref_name }}}}'
           build_arch: linux/amd64,linux/arm64
-          buildfile: 'puppetdb/Dockerfile'
+          build_context: puppetdb
         if: ${{ startsWith(github.ref_name, '7') }}
 
       - name: Build PuppetDB 8 container
@@ -32,5 +32,5 @@ jobs:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           build_args: 'PUPPET_RELEASE=8,PUPPET_VERSION=${{ github.ref_name }}}}'
           build_arch: linux/amd64,linux/arm64
-          buildfile: 'puppetdb/Dockerfile'
+          build_context: puppetdb
         if: ${{ startsWith(github.ref_name, '8') }}
