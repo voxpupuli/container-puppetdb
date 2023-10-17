@@ -24,7 +24,7 @@ jobs:
           build_args: |
             PUPPET_RELEASE=7
             PUPPET_VERSION=${{ github.ref_name }}
-          build_arch: linux/amd64,linux/arm64
+          build_arch: linux/amd64 #,linux/arm64
           build_context: puppetdb
           buildfile: puppetdb/Dockerfile
         if: ${{ startsWith(github.ref_name, '7') }}
@@ -36,7 +36,7 @@ jobs:
           build_args: |
             PUPPET_RELEASE=8
             PUPPET_VERSION=${{ github.ref_name }}
-          build_arch: linux/amd64,linux/arm64
+          build_arch: linux/amd64 #,linux/arm64
           build_context: puppetdb
           buildfile: puppetdb/Dockerfile
         if: ${{ startsWith(github.ref_name, '8') }}
