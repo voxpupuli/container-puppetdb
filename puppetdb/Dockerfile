@@ -12,6 +12,7 @@ FROM ubuntu:22.04 as base
 
 ARG DUMB_INIT_VERSION="1.2.5"
 ARG LOGDIR
+ARG TARGETARCH
 
 ENV PUPPETDB_POSTGRES_HOSTNAME="postgres" \
     PUPPETDB_POSTGRES_PORT="5432" \
@@ -59,7 +60,7 @@ HEALTHCHECK --start-period=5m --interval=10s --timeout=10s --retries=6 CMD ["/he
 ADD https://raw.githubusercontent.com/puppetlabs/pupperware/1c8d5f7fdcf2a81dfaf34f5ee34435cc50526d35/gem/lib/pupperware/compose-services/pe-postgres-custom/00-ssl.sh /ssl.sh
 # hadolint ignore=DL3020
 ADD https://raw.githubusercontent.com/puppetlabs/wtfc/6aa5eef89728cc2903490a618430cc3e59216fa8/wtfc.sh \
-    https://github.com/Yelp/dumb-init/releases/download/v"$DUMB_INIT_VERSION"/dumb-init_"$DUMB_INIT_VERSION"_amd64.deb \
+    https://github.com/Yelp/dumb-init/releases/download/v"$DUMB_INIT_VERSION"/dumb-init_"$DUMB_INIT_VERSION"_"$TARGETARCH".deb \
     docker-entrypoint.sh \
     healthcheck.sh \
     /
@@ -71,8 +72,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && \
     apt install --no-install-recommends -y ca-certificates curl dnsutils netcat && \
     chmod +x /ssl.sh /wtfc.sh /docker-entrypoint.sh /healthcheck.sh /docker-entrypoint.d/*.sh && \
-    dpkg -i dumb-init_"$DUMB_INIT_VERSION"_amd64.deb && \
-    rm dumb-init_"$DUMB_INIT_VERSION"_amd64.deb
+    dpkg -i dumb-init_"$DUMB_INIT_VERSION"_"$TARGETARCH".deb && \
+    rm dumb-init_"$DUMB_INIT_VERSION"_"$TARGETARCH".deb
 
 ######################################################
 # release (build from packages)
