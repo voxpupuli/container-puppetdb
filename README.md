@@ -1,6 +1,10 @@
 # Voxpupuli PuppetDB container
 
+[![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
+
 This project hosts the Dockerfile and the required scripts to build a PuppetDB container image.
+
+For compose file see: [CRAFTY](https://github.com/voxpupuli/crafty)
 
 The PuppetDB container requires a working postgres container or other suitably
 configured PostgreSQL database. With that in place, you can run PuppetDB like
@@ -13,9 +17,6 @@ configuration files or by using this image as a base image. For the defaults,
 see the [Dockerfile and supporting folders][1].
 
 For more details about PuppetDB, see the [official documentation][2].
-
-See the [pupperware repository][3] for how to run a full Puppet stack using
-Docker Compose.
 
 ## Configuration
 
@@ -36,7 +37,6 @@ Docker Compose.
 | **PUPPETDB_NODE_PURGE_TTL**             | Automatically delete nodes that have been deactivated or expired for the specified amount of time<br><br>`14d`                                                                     |
 | **PUPPETDB_REPORT_TTL**                 | Automatically delete reports that are older than the specified amount of time<br><br>`14d`                                                                                         |
 | **PUPPETDB_JAVA_ARGS**                  | Arguments passed directly to the JVM when starting the service<br><br>`-Djava.net.preferIPv4Stack=true -Xms256m -Xmx256m -XX:+UseParallelGC -Xloggc:/opt/puppetlabs/server/data/puppetdb/logs/puppetdb_gc.log -Djdk.tls.ephemeralDHKeySize=2048` |
-| **PUPPERWARE_ANALYTICS_ENABLED**        | Set to 'true' to enable Google Analytics.<br><br>`false`                                                                                                                           |
 
 ### Cert File Locations
 
@@ -51,23 +51,6 @@ The directory structure follows the following conventions.  The full path is alw
 - 'ssl-key'
   `/opt/puppetlabs/server/data/puppetdb/certs/private_keys/<certname>.pem`
 
-## Analytics Data Collection
 
- The puppetdb container collects usage data. This is disabled by default. You can enable it by passing `--env PUPPERWARE_ANALYTICS_ENABLED=true`
-to your `docker run` command.
-
-### What data is collected?
-* Version of the puppetdb container.
-* Anonymized IP address is used by Google Analytics for Geolocation data, but the IP address is not collected.
-
-### Why does the puppetdb container collect data?
-
- We collect data to help us understand how the containers are used and make decisions about upcoming changes.
-
-### How can I opt out of puppetdb container data collection?
-
- This is disabled by default.
-
-[1]: https://github.com/puppetlabs/puppetdb/tree/master/docker
+[1]: https://github.com/voxpupuli/container-puppetdb/tree/main/puppetdb
 [2]: https://puppet.com/docs/puppetdb/latest/index.html
-[3]: https://github.com/puppetlabs/pupperware
