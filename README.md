@@ -1,6 +1,7 @@
 # Voxpupuli PuppetDB container
 
 [![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
+[![License](https://img.shields.io/github/license/voxpupuli/container-puppetdb.svg)](https://github.com/voxpupuli/container-puppetdb/blob/main/LICENSE)
 
 This project hosts the Dockerfile and the required scripts to build a PuppetDB container image.
 
