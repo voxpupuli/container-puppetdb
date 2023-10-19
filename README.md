@@ -2,10 +2,11 @@
 
 [![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
 [![License](https://img.shields.io/github/license/voxpupuli/container-puppetdb.svg)](https://github.com/voxpupuli/container-puppetdb/blob/main/LICENSE)
+[![CI](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml/badge.svg)](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml)
 
 This project hosts the Dockerfile and the required scripts to build a PuppetDB container image.
 
-For compose file see: [CRAFTY](https://github.com/voxpupuli/crafty)
+For compose file see: [CRAFTY](https://github.com/voxpupuli/crafty/tree/main/puppet/oss)
 
 The PuppetDB container requires a working postgres container or other suitably
 configured PostgreSQL database. With that in place, you can run PuppetDB like
@@ -52,6 +53,9 @@ The directory structure follows the following conventions.  The full path is alw
 - 'ssl-key'
   `/opt/puppetlabs/server/data/puppetdb/certs/private_keys/<certname>.pem`
 
+## How to build the container
+
+[see here](https://github.com/voxpupuli/crafty/blob/main/docs/how-to-build.md)
 
 [1]: https://github.com/voxpupuli/container-puppetdb/tree/main/puppetdb
 [2]: https://puppet.com/docs/puppetdb/latest/index.html
