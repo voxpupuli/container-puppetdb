@@ -53,6 +53,7 @@ PUPPETDB_WAITFORPOSTGRES_SECONDS=${PUPPETDB_WAITFORPOSTGRES_SECONDS:-60}
 PUPPETDB_WAITFORHEALTH_SECONDS=${PUPPETDB_WAITFORHEALTH_SECONDS:-360}
 PUPPETDB_POSTGRES_HOSTNAME="${PUPPETDB_POSTGRES_HOSTNAME:-postgres}"
 PUPPETSERVER_HOSTNAME="${PUPPETSERVER_HOSTNAME:-puppet}"
+PUPPETSERVER_PORT="${PUPPETSERVER_PORT:-8140}"
 
 # wait for postgres DNS
 wait_for_host_name_resolution $PUPPETDB_POSTGRES_HOSTNAME $PUPPETDB_WAITFORHOST_SECONDS
@@ -60,7 +61,7 @@ wait_for_host_name_resolution $PUPPETDB_POSTGRES_HOSTNAME $PUPPETDB_WAITFORHOST_
 # wait for puppetserver DNS, then healthcheck
 if [ "$USE_PUPPETSERVER" = true ]; then
   wait_for_host_name_resolution $PUPPETSERVER_HOSTNAME $PUPPETDB_WAITFORHOST_SECONDS
-  HEALTH_COMMAND="curl --silent --fail --insecure 'https://${PUPPETSERVER_HOSTNAME}:"${PUPPETSERVER_PORT:-8140}"/status/v1/simple' | grep -q '^running$'"
+  HEALTH_COMMAND="curl --silent --fail --insecure 'https://${PUPPETSERVER_HOSTNAME}:"${PUPPETSERVER_PORT}"/status/v1/simple' | grep -q '^running$'"
 fi
 
 if [ -n "$HEALTH_COMMAND" ]; then

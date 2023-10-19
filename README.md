@@ -22,22 +22,22 @@ For more details about PuppetDB, see the [official documentation][2].
 
 ## Configuration
 
-| Name                                    | Usage / Default                                                                                                                                                                    |
-|-----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **CERTNAME**                            | The DNS name used on this services SSL certificate<br><br>`puppetdb`                                                                                                               |
-| **DNS_ALT_NAMES**                       | Additional DNS names to add to the services SSL certificate<br><br>Unset                                                                                                           |
-| **WAITFORCERT**                         | Number of seconds to wait for certificate to be signed<br><br>`120`                                                                                                                |
-| **USE_PUPPETSERVER**                    | Set to `false` to skip acquiring SSL certificates from a Puppet Server.<br><br>`true`                                                                                              |
-| **PUPPETSERVER_HOSTNAME**               | The DNS hostname of the puppet master<br><br>`puppet`                                                                                                                              |
-| **PUPPETSERVER_PORT**                   | The port of the puppet master<br><br>`8140`                                                                                                                                        |
-| **PUPPETDB_POSTGRES_HOSTNAME**          | The DNS hostname of the postgres service<br><br>`postgres`                                                                                                                         |
-| **PUPPETDB_POSTGRES_PORT**              | The port for postgres<br><br>`5432`                                                                                                                                                |
-| **PUPPETDB_POSTGRES_DATABASE**          | The name of the puppetdb database in postgres<br><br>`puppetdb`                                                                                                                    |
-| **PUPPETDB_USER**                       | The puppetdb database user<br><br>`puppetdb`                                                                                                                                       |
-| **PUPPETDB_PASSWORD**                   | The puppetdb database password<br><br>`puppetdb`                                                                                                                                   |
-| **PUPPETDB_NODE_TTL**                   | Mark as ‘expired’ nodes that haven’t seen any activity (no new catalogs, facts, or reports) in the specified amount of time<br><br>`7d`                                            |
-| **PUPPETDB_NODE_PURGE_TTL**             | Automatically delete nodes that have been deactivated or expired for the specified amount of time<br><br>`14d`                                                                     |
-| **PUPPETDB_REPORT_TTL**                 | Automatically delete reports that are older than the specified amount of time<br><br>`14d`                                                                                         |
+| Name                                    | Usage / Default                                                                                                                         |
+|-----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| **CERTNAME**                            | The DNS name used on this services SSL certificate<br><br>`puppetdb`                                                                    |
+| **DNS_ALT_NAMES**                       | Additional DNS names to add to the services SSL certificate<br><br>Unset                                                                |
+| **WAITFORCERT**                         | Number of seconds to wait for certificate to be signed<br><br>`120`                                                                     |
+| **USE_PUPPETSERVER**                    | Set to `false` to skip acquiring SSL certificates from a Puppet Server.<br><br>`true`                                                   |
+| **PUPPETSERVER_HOSTNAME**               | The DNS hostname of the puppet server<br><br>`puppet`                                                                                   |
+| **PUPPETSERVER_PORT**                   | The port of the puppet server<br><br>`8140`                                                                                             |
+| **PUPPETDB_POSTGRES_HOSTNAME**          | The DNS hostname of the postgres service<br><br>`postgres`                                                                              |
+| **PUPPETDB_POSTGRES_PORT**              | The port for postgres<br><br>`5432`                                                                                                     |
+| **PUPPETDB_POSTGRES_DATABASE**          | The name of the puppetdb database in postgres<br><br>`puppetdb`                                                                         |
+| **PUPPETDB_USER**                       | The puppetdb database user<br><br>`puppetdb`                                                                                            |
+| **PUPPETDB_PASSWORD**                   | The puppetdb database password<br><br>`puppetdb`                                                                                        |
+| **PUPPETDB_NODE_TTL**                   | Mark as ‘expired’ nodes that haven’t seen any activity (no new catalogs, facts, or reports) in the specified amount of time<br><br>`7d` |
+| **PUPPETDB_NODE_PURGE_TTL**             | Automatically delete nodes that have been deactivated or expired for the specified amount of time<br><br>`14d`                          |
+| **PUPPETDB_REPORT_TTL**                 | Automatically delete reports that are older than the specified amount of time<br><br>`14d`                                              |
 | **PUPPETDB_JAVA_ARGS**                  | Arguments passed directly to the JVM when starting the service<br><br>`-Djava.net.preferIPv4Stack=true -Xms256m -Xmx256m -XX:+UseParallelGC -Xloggc:/opt/puppetlabs/server/data/puppetdb/logs/puppetdb_gc.log -Djdk.tls.ephemeralDHKeySize=2048` |
 
 ### Cert File Locations
