@@ -21,14 +21,14 @@ jobs:
         run: |
           TAG=${{ github.ref_name }}
           echo "PUPPET_RELEASE=${TAG:0:1}" >> $GITHUB_ENV
-          echo "PUPPETSERVER_VERSION=${TAG}" >> $GITHUB_ENV
-      - name: Build Puppetserver ${{ env.PUPPETSERVER_VERSION }} container
+          echo "PUPPETDB_VERSION=${TAG}" >> $GITHUB_ENV
+      - name: Build PuppetDB ${{ env.PUPPETDB_VERSION }} container
         uses: voxpupuli/gha-build-and-publish-a-container@v2
         with:
           registry_password: ${{ secrets.GITHUB_TOKEN }}
           build_args: |
             PUPPET_RELEASE=${{ env.PUPPET_RELEASE }}
-            PUPPETSERVER_VERSION=${{ env.PUPPETSERVER_VERSION }}
+            PUPPETDB_VERSION=${{ env.PUPPETDB_VERSION }}
           build_arch: linux/amd64 #,linux/arm64
-          build_context: puppetserver
-          buildfile: puppetserver/Dockerfile
+          build_context: puppetdb
+          buildfile: puppetdb/Dockerfile
