@@ -53,9 +53,9 @@ The directory structure follows the following conventions.  The full path is alw
 - 'ssl-key'
   `/opt/puppetlabs/server/data/puppetdb/certs/private_keys/<certname>.pem`
 
-## How to build the container
+## How to Release the container
 
-[see here](https://github.com/voxpupuli/crafty/blob/main/docs/how-to-build.md)
+[see here](https://github.com/voxpupuli/crafty/blob/main/docs/how-to-release.md)
 
 [1]: https://github.com/voxpupuli/container-puppetdb/tree/main/puppetdb
 [2]: https://puppet.com/docs/puppetdb/latest/index.html
