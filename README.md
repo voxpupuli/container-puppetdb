@@ -12,7 +12,7 @@ The PuppetDB container requires a working postgres container or other suitably
 configured PostgreSQL database. With that in place, you can run PuppetDB like
 so:
 
-    docker run --link postgres:postgres --link puppet:puppet voxpupuli/puppetdb
+    docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:v1.0.0-7
 
 You can change configuration settings by mounting volumes containing
 configuration files or by using this image as a base image. For the defaults,
@@ -56,6 +56,10 @@ The directory structure follows the following conventions.  The full path is alw
 ## How to Release the container
 
 [see here](https://github.com/voxpupuli/crafty/blob/main/docs/how-to-release.md)
+
+## How to contribute
+
+[see here](https://github.com/voxpupuli/crafty/blob/main/CONTRIBUTING.md
 
 [1]: https://github.com/voxpupuli/container-puppetdb/tree/main/puppetdb
 [2]: https://puppet.com/docs/puppetdb/latest/index.html
