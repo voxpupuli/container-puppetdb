@@ -59,7 +59,7 @@ The directory structure follows the following conventions.  The full path is alw
 
 ## How to contribute
 
-[see here](https://github.com/voxpupuli/crafty/blob/main/CONTRIBUTING.md
+[see here](https://github.com/voxpupuli/crafty/blob/main/CONTRIBUTING.md)
 
 [1]: https://github.com/voxpupuli/container-puppetdb/tree/main/puppetdb
 [2]: https://puppet.com/docs/puppetdb/latest/index.html
