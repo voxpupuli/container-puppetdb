@@ -4,6 +4,16 @@
 [![License](https://img.shields.io/github/license/voxpupuli/container-puppetdb.svg)](https://github.com/voxpupuli/container-puppetdb/blob/main/LICENSE)
 [![CI](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml/badge.svg)](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml)
 
+---
+
+- [Voxpupuli PuppetDB container](#voxpupuli-puppetdb-container)
+  * [Configuration](#configuration)
+    + [Cert File Locations](#cert-file-locations)
+  * [How to Release the container](#how-to-release-the-container)
+  * [How to contribute](#how-to-contribute)
+
+---
+
 This project hosts the Dockerfile and the required scripts to build a PuppetDB container image.
 
 For compose file see: [CRAFTY](https://github.com/voxpupuli/crafty/tree/main/puppet/oss)
