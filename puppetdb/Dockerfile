@@ -30,7 +30,7 @@ ENV PUPPETDB_POSTGRES_HOSTNAME="postgres" \
     USE_PUPPETSERVER=true \
 # this value may be set by users, keeping in mind that some of these values are mandatory
 # -Djavax.net.debug=ssl may be particularly useful to set for debugging SSL
-    PUPPETDB_JAVA_ARGS="-Djava.net.preferIPv4Stack=true -Xms256m -Xmx256m -XX:+UseParallelGC -Xlog:gc:file=$LOGDIR/puppetdb_gc.log -Djdk.tls.ephemeralDHKeySize=2048"
+    PUPPETDB_JAVA_ARGS="-Djava.net.preferIPv4Stack=true -Xms256m -Xmx256m -XX:+UseParallelGC -Xlog:gc*:file=$LOGDIR/puppetdb_gc.log -Djdk.tls.ephemeralDHKeySize=2048"
 
 # puppetdb data and generated certs
 VOLUME /opt/puppetlabs/server/data/puppetdb
@@ -112,10 +112,14 @@ RUN dpkg -i /${PUPPET_DEB} && \
     apt autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p "$LOGDIR" && \
+    chown puppetdb:puppetdb "$LOGDIR" && \
 # We want to use the HOCON database.conf and config.conf files, so get rid
 # of the packaged files
     rm -f /etc/puppetlabs/puppetdb/conf.d/database.ini && \
     rm -f /etc/puppetlabs/puppetdb/conf.d/config.ini
+
+RUN apt update && \
+    apt install --no-install-recommends -y openjdk-17-jre-headless
 
 COPY logback.xml \
      request-logging.xml \
