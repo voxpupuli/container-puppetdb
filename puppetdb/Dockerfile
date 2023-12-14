@@ -109,6 +109,7 @@ RUN dpkg -i /${PUPPET_DEB} && \
     rm /${PUPPET_DEB} && \
     apt update && \
     apt install --no-install-recommends -y puppetdb=${PUPPETDB_VERSION}-1${UBUNTU_CODENAME} && \
+    apt install --no-install-recommends -y openjdk-17-jre-headless && \
     apt autoremove && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir -p "$LOGDIR" && \
@@ -117,9 +118,6 @@ RUN dpkg -i /${PUPPET_DEB} && \
 # of the packaged files
     rm -f /etc/puppetlabs/puppetdb/conf.d/database.ini && \
     rm -f /etc/puppetlabs/puppetdb/conf.d/config.ini
-
-RUN apt update && \
-    apt install --no-install-recommends -y openjdk-17-jre-headless
 
 COPY logback.xml \
      request-logging.xml \
