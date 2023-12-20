@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# Taken from https://raw.githubusercontent.com/puppetlabs/wtfc/6aa5eef89728cc2903490a618430cc3e59216fa8/wtfc.sh
+# December, 20, 2023
 
 cmdname="${0##*/}"
 

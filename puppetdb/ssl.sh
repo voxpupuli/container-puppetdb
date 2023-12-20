@@ -1,5 +1,8 @@
 #!/bin/sh
 #
+# Taken from https://raw.githubusercontent.com/puppetlabs/pupperware/1c8d5f7fdcf2a81dfaf34f5ee34435cc50526d35/gem/lib/pupperware/compose-services/pe-postgres-custom/00-ssl.sh
+# December 20, 2023
+#
 # Get a signed certificate for this host.
 #
 # Uses OpenSSL directly to generate a new CSR and get it signed by the
