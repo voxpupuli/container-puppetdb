@@ -7,6 +7,7 @@
 ---
 
 - [Voxpupuli PuppetDB container](#voxpupuli-puppetdb-container)
+  * [New version schema](#new-version-schema)
   * [Configuration](#configuration)
     + [Cert File Locations](#cert-file-locations)
   * [How to Release the container](#how-to-release-the-container)
@@ -22,13 +23,36 @@ The PuppetDB container requires a working postgres container or other suitably
 configured PostgreSQL database. With that in place, you can run PuppetDB like
 so:
 
-    docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:v1.0.0-7
+    docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
 
 You can change configuration settings by mounting volumes containing
 configuration files or by using this image as a base image. For the defaults,
 see the [Dockerfile and supporting folders][1].
 
 For more details about PuppetDB, see the [official documentation][2].
+
+## New version schema
+
+The new version schema has the following layout:
+
+```text
+<puppet.major>.<puppet.minor>.<puppet.patch>-v<container.major>.<container.minor>.<container.patch>
+```
+
+Example usage:
+
+```shell
+docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
+```
+
+| Name | Description |
+| --- | --- |
+| puppet.major | Describes the contained major Puppet version (7 or 8) |
+| puppet.minor | Describes the contained minor Puppet version |
+| puppet.patch | Describes the contained patchlevel Puppet version |
+| container.major | Describes the major version of the base container (Ubunutu 22.04) or incompatible changes |
+| container.minor | Describes new features or refactoring with backward compatibility |
+| container.patch | Describes if minor changes or bugfixes have been implemented |
 
 ## Configuration
 
