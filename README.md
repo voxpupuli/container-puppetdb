@@ -10,6 +10,7 @@
   * [New version schema](#new-version-schema)
   * [Configuration](#configuration)
     + [Cert File Locations](#cert-file-locations)
+  * [Initialization Scripts](#initialization-scripts)
   * [How to Release the container](#how-to-release-the-container)
   * [How to contribute](#how-to-contribute)
 
@@ -86,6 +87,11 @@ The directory structure follows the following conventions.  The full path is alw
 
 - 'ssl-key'
   `/opt/puppetlabs/server/data/puppetdb/certs/private_keys/<certname>.pem`
+
+## Initialization Scripts
+
+If you would like to do additional initialization, add a directory called `/docker-custom-entrypoint.d/` and fill it with `.sh` scripts.
+These scripts will be executed at the end of the entrypoint script, before the service is ran.
 
 ## How to Release the container
 
