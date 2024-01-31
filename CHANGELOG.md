@@ -11,11 +11,6 @@ All notable changes to this project will be documented in this file.
 - PuppetDB 7.16.0 and 8.3.0 [\#44](https://github.com/voxpupuli/container-puppetdb/issues/44)
 - Update puppetdb packages [\#45](https://github.com/voxpupuli/container-puppetdb/pull/45) ([tuxmea](https://github.com/tuxmea))
 
-**Closed issues:**
-
-- Add support for custom initialization scripts [\#39](https://github.com/voxpupuli/container-puppetdb/issues/39)
-- Implement shellcheck in CI [\#34](https://github.com/voxpupuli/container-puppetdb/issues/34)
-
 **Merged pull requests:**
 
 - add skip-changelog to all release prs [\#46](https://github.com/voxpupuli/container-puppetdb/pull/46) ([rwaffen](https://github.com/rwaffen))
