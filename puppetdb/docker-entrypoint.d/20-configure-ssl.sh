@@ -11,6 +11,8 @@ if [ "$USE_PUPPETSERVER" = true ]; then
   sed -i '/^# ssl-/s/^# //g' /etc/puppetlabs/puppetdb/conf.d/jetty.ini
 fi
 
-# make sure Java apps running as puppetdb can read these files
-echo "Setting ownership for $SSLDIR to puppetdb:puppetdb"
-chown -R puppetdb:puppetdb ${SSLDIR}
+if [ -w "$SSLDIR" ] && [ "$(id -un)" = "root" ]; then
+  # make sure Java apps running as puppetdb can read these files
+  echo "Setting ownership for $SSLDIR to puppetdb:puppetdb"
+  chown -R puppetdb:puppetdb ${SSLDIR}
+fi
