@@ -24,7 +24,7 @@ The PuppetDB container requires a working postgres container or other suitably
 configured PostgreSQL database. With that in place, you can run PuppetDB like
 so:
 
-    docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
+    docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-v1.3.0
 
 You can change configuration settings by mounting volumes containing
 configuration files or by using this image as a base image. For the defaults,
@@ -43,7 +43,7 @@ The new version schema has the following layout:
 Example usage:
 
 ```shell
-docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
+docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-v1.3.0
 ```
 
 | Name | Description |
