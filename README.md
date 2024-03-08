@@ -1,18 +1,20 @@
 # Voxpupuli PuppetDB container
 
-[![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
-[![License](https://img.shields.io/github/license/voxpupuli/container-puppetdb.svg)](https://github.com/voxpupuli/container-puppetdb/blob/main/LICENSE)
 [![CI](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml/badge.svg)](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml)
+[![License](https://img.shields.io/github/license/voxpupuli/container-puppetdb.svg)](https://github.com/voxpupuli/container-puppetdb/blob/main/LICENSE)
+[![Donated by Puppet](https://img.shields.io/badge/Donated%20by-Puppet-blue.svg)](https://www.puppet.com)
+[![Sponsored by betadots GmbH](https://img.shields.io/badge/Sponsored%20by-betadots%20GmbH-blue.svg)](https://www.betadots.de)
 
 ---
 
 - [Voxpupuli PuppetDB container](#voxpupuli-puppetdb-container)
-  * [New version schema](#new-version-schema)
-  * [Configuration](#configuration)
-    + [Cert File Locations](#cert-file-locations)
-  * [Initialization Scripts](#initialization-scripts)
-  * [How to Release the container](#how-to-release-the-container)
-  * [How to contribute](#how-to-contribute)
+  - [New version schema](#new-version-schema)
+  - [Configuration](#configuration)
+    - [Cert File Locations](#cert-file-locations)
+  - [Initialization Scripts](#initialization-scripts)
+  - [How to Release the container](#how-to-release-the-container)
+  - [How to contribute](#how-to-contribute)
+  - [Transfer notice](#transfer-notice)
 
 ---
 
@@ -24,13 +26,15 @@ The PuppetDB container requires a working postgres container or other suitably
 configured PostgreSQL database. With that in place, you can run PuppetDB like
 so:
 
-    docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-v1.3.0
+```shell
+docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-v1.3.0
+```
 
 You can change configuration settings by mounting volumes containing
 configuration files or by using this image as a base image. For the defaults,
-see the [Dockerfile and supporting folders][1].
+see the [Dockerfile and supporting folders](https://github.com/voxpupuli/container-puppetdb/tree/main/puppetdb).
 
-For more details about PuppetDB, see the [official documentation][2].
+For more details about PuppetDB, see the [official documentation](https://puppet.com/docs/puppetdb/latest/index.html).
 
 ## New version schema
 
@@ -101,5 +105,8 @@ These scripts will be executed at the end of the entrypoint script, before the s
 
 [see here](https://github.com/voxpupuli/crafty/blob/main/CONTRIBUTING.md)
 
-[1]: https://github.com/voxpupuli/container-puppetdb/tree/main/puppetdb
-[2]: https://puppet.com/docs/puppetdb/latest/index.html
+## Transfer Notice
+
+This project was originally authored by [Puppet](https://github.com/puppetlabs).
+The maintainer preferred that Vox Pupuli take ownership of the project for future improvement and maintenance.
+Existing pull requests and issues were transferred over, please fork and continue to contribute here.
