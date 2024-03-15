@@ -27,7 +27,7 @@ configured PostgreSQL database. With that in place, you can run PuppetDB like
 so:
 
 ```shell
-docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
+docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-latest
 ```
 
 You can change configuration settings by mounting volumes containing
@@ -47,7 +47,7 @@ The new version schema has the following layout:
 Example usage:
 
 ```shell
-docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
+docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-latest
 ```
 
 | Name | Description |
