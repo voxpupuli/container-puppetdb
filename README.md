@@ -23,12 +23,7 @@ This project hosts the Dockerfile and the required scripts to build a PuppetDB c
 For compose file see: [CRAFTY](https://github.com/voxpupuli/crafty/tree/main/puppet/oss)
 
 The PuppetDB container requires a working postgres container or other suitably
-configured PostgreSQL database. With that in place, you can run PuppetDB like
-so:
-
-```shell
-docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-latest
-```
+configured PostgreSQL database. For a Compose example see the [CRAFTY OSS Demo compose.yaml](https://github.com/voxpupuli/crafty/blob/main/puppet/oss/compose.yaml)
 
 You can change configuration settings by mounting volumes containing
 configuration files or by using this image as a base image. For the defaults,
@@ -47,7 +42,7 @@ The new version schema has the following layout:
 Example usage:
 
 ```shell
-docker run --link postgres:postgres --link puppet:puppet ghcr.io/voxpupuli/container-puppetdb:7.16.0-latest
+docker pull ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
 ```
 
 | Name | Description |
