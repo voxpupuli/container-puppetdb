@@ -96,6 +96,7 @@ ARG UBUNTU_CODENAME
 # hadolint ignore=DL3006
 FROM ${build_type} as final
 
+ARG UBUNTU_CODENAME
 ARG vcs_ref
 ARG build_date
 ARG build_type
