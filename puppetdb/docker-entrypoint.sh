@@ -3,8 +3,6 @@
 
 set -e
 
-. /etc/puppetlabs/puppetdb/conf.d/.dockerenv
-
 for f in /docker-entrypoint.d/*.sh; do
     echo "Running $f"
     "$f"
