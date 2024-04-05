@@ -73,6 +73,8 @@ docker pull ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
 | **PUPPETDB_NODE_PURGE_TTL**             | Automatically delete nodes that have been deactivated or expired for the specified amount of time<br><br>`14d`                          |
 | **PUPPETDB_REPORT_TTL**                 | Automatically delete reports that are older than the specified amount of time<br><br>`14d`                                              |
 | **PUPPETDB_JAVA_ARGS**                  | Arguments passed directly to the JVM when starting the service<br><br>`-Djava.net.preferIPv4Stack=true -Xms256m -Xmx256m -XX:+UseParallelGC -Xloggc:/opt/puppetlabs/server/data/puppetdb/logs/puppetdb_gc.log -Djdk.tls.ephemeralDHKeySize=2048` |
+| **LOGDIR**                              | Path of the log directory<br><br>`/opt/puppetlabs/server/data/puppetdb/logs`                                                            |
+| **SSLDIR**                              | Path of the SSL directory<br><br>`/opt/puppetlabs/server/data/puppetdb/certs`                                                           |
 
 ### Cert File Locations
 

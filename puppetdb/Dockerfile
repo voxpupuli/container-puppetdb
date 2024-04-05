@@ -100,7 +100,12 @@ ARG UBUNTU_CODENAME
 ARG vcs_ref
 ARG build_date
 ARG build_type
+
 ARG LOGDIR
+ENV LOGDIR=${LOGDIR:-/opt/puppetlabs/server/data/puppetdb/logs}
+
+ARG SSLDIR
+ENV SSLDIR=${SSLDIR:-/opt/puppetlabs/server/data/puppetdb/certs}
 
 ENV PUPPET_DEB=puppet${PUPPET_RELEASE}-release-${UBUNTU_CODENAME}.deb
 ADD https://apt.puppet.com/${PUPPET_DEB} /${PUPPET_DEB}
