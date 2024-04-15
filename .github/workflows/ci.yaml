@@ -1,11 +1,12 @@
 ---
+name: CI🚦
+
 on:
   pull_request: {}
   push:
     branches:
       - main
 
-name: CI
 
 jobs:
   general_ci:
