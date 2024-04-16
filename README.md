@@ -96,7 +96,7 @@ These scripts will be executed at the end of the entrypoint script, before the s
 
 ## How to Release the container
 
-[see here](https://github.com/voxpupuli/crafty/blob/main/docs/how-to-release.md)
+[see here](https://github.com/voxpupuli/crafty/blob/main/RELEASE.md)
 
 ## How to contribute
 
