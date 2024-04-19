@@ -1,5 +1,7 @@
 #!/bin/sh
-#
+
+set -e
+
 # Wait on hosts to become available before proceeding
 #
 #

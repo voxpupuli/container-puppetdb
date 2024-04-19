@@ -1,9 +1,9 @@
 #!/bin/sh
 
+set -e
+
 # when certs need to be generated and haven't been user supplied
 if [ "$USE_PUPPETSERVER" = true ]; then
-  set -e
-
   # previously DNS_ALT_NAMES was omitted if empty, but ssl.sh already skips setting when empty
   DNS_ALT_NAMES="${DNS_ALT_NAMES}" CERTNAME="$CERTNAME" /ssl.sh
 
