@@ -72,6 +72,8 @@ docker pull ghcr.io/voxpupuli/puppetdb:7.13.0-v1.2.1
 | **PUPPETDB_POSTGRES_DATABASE**          | The name of the puppetdb database in postgres<br><br>`puppetdb`                                                                         |
 | **PUPPETDB_USER**                       | The puppetdb database user<br><br>`puppetdb`                                                                                            |
 | **PUPPETDB_PASSWORD**                   | The puppetdb database password<br><br>`puppetdb`                                                                                        |
+| **PUPPETDB_READ_USER**                  | The puppetdb database read-only user<br><br>(optional)                                                                                  |
+| **PUPPETDB_READ_PASSWORD**              | The puppetdb database read-only password<br><br>(optional)                                                                              |
 | **PUPPETDB_NODE_TTL**                   | Mark as ‘expired’ nodes that haven’t seen any activity (no new catalogs, facts, or reports) in the specified amount of time<br><br>`7d` |
 | **PUPPETDB_NODE_PURGE_TTL**             | Automatically delete nodes that have been deactivated or expired for the specified amount of time<br><br>`14d`                          |
 | **PUPPETDB_REPORT_TTL**                 | Automatically delete reports that are older than the specified amount of time<br><br>`14d`                                              |
