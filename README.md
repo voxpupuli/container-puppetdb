@@ -18,6 +18,9 @@
 
 ---
 
+__⚠️ Attention ⚠️__: the container name `voxpupuli/container-puppetdb` will be deprecated in 2025-02 and might be removed in the future. Please use `voxpupuli/puppetdb` instead.
+
+---
 This project hosts the Dockerfile and the required scripts to build a PuppetDB container image.
 
 For compose file see: [CRAFTY](https://github.com/voxpupuli/crafty/tree/main/puppet/oss)
