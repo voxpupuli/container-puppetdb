@@ -49,37 +49,6 @@ jobs:
             PUPPET_RELEASE=${{ matrix.release }}
             PUPPETDB_VERSION=${{ matrix.version }}
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: voxpupulibot
-          password: ${{ secrets.DOCKERHUB_BOT_PASSWORD }}
-
-      - name: Analyze container image for CVEs
-        id: analyze-image-cves
-        uses: docker/scout-action@v1
-        with:
-          command: cves
-          image: 'local://ci/puppetdb:${{ matrix.version }}'
-          sarif-file: sarif.output.${{ matrix.version }}.${{ github.sha }}.json
-          write-comment: false
-
-      - name: Compare container image to latest from Registry
-        id: compare-image
-        uses: docker/scout-action@v1
-        with:
-          command: compare
-          image: 'local://ci/puppetdb:${{ matrix.version }}'
-          to: 'ghcr.io/voxpupuli/puppetdb:${{ matrix.version }}-latest'
-          summary: true
-          keep-previous-comments: true
-
-      - name: Upload SARIF result
-        id: upload-sarif
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: sarif.output.${{ matrix.version }}.${{ github.sha }}.json
-
   tests:
     needs:
       - general_ci
@@ -88,3 +57,24 @@ jobs:
     name: Test suite
     steps:
       - run: echo Test suite completed
+
+  dependabot:
+    permissions:
+      contents: write
+    name: 'Dependabot auto-merge'
+    needs:
+      - tests
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
+    steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2.2.0
+        with:
+          github-token: '${{ secrets.GITHUB_TOKEN }}'
+
+      - name: Enable auto-merge for Dependabot PRs
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
