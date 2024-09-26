@@ -3,6 +3,11 @@
 
 set -e
 
+# Remove optional config files if values are not set
+if [[ ( -z "$PUPPETDB_READ_USER" || -z "$PUPPETDB_READ_PASSWORD" ) && -e /etc/puppetlabs/puppetdb/conf.d/read-database.conf ]]; then
+    rm /etc/puppetlabs/puppetdb/conf.d/read-database.conf
+fi
+
 for f in /docker-entrypoint.d/*.sh; do
     echo "Running $f"
     "$f"
