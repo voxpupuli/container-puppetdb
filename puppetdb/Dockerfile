@@ -1,4 +1,4 @@
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 ARG vcs_ref
 ARG build_date
@@ -17,7 +17,6 @@ LABEL org.label-schema.maintainer="Voxpupuli Release Team <voxpupuli@groups.io>"
 
 ARG DUMB_INIT_VERSION="1.2.5"
 ARG TARGETARCH
-# ! Fix me: use jammy as long as noble is not released
 ARG UBUNTU_CODENAME=jammy
 
 ARG LOGDIR
