@@ -46,7 +46,7 @@ jobs:
             PUPPETDB_VERSION=${{ matrix.version }}
 
       - name: Scan image with Anchore Grype
-        uses: anchore/scan-action@v5
+        uses: anchore/scan-action@v6
         id: scan
         with:
           image: 'ci/puppetdb:${{ matrix.version }}'
