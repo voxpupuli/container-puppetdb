@@ -42,6 +42,7 @@ ENV PUPPETDB_POSTGRES_HOSTNAME="postgres" \
     PUPPETDB_NODE_TTL=7d \
     PUPPETDB_NODE_PURGE_TTL=14d \
     PUPPETDB_REPORT_TTL=14d \
+    PUPPETDB_CERTIFICATE_ALLOWLIST="" \
     # used by entrypoint to determine if puppetserver should be contacted for config
     # set to false when container tests are run
     USE_PUPPETSERVER=true \
