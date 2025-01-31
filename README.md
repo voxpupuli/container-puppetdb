@@ -1,5 +1,9 @@
 # Voxpupuli PuppetDB container
 
+# ⚠️ Deprecated ⚠️
+
+This repository is deprecated and will be archived soon. Please use the [OpenVox DB container](https://github.com/OpenVoxProject/container-openvoxdb) instead.
+
 [![CI](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml/badge.svg)](https://github.com/voxpupuli/container-puppetdb/actions/workflows/ci.yaml)
 [![License](https://img.shields.io/github/license/voxpupuli/container-puppetdb.svg)](https://github.com/voxpupuli/container-puppetdb/blob/main/LICENSE)
 [![Donated by Puppet](https://img.shields.io/badge/Donated%20by-Puppet-blue.svg)](https://www.puppet.com)
